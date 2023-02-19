@@ -1,25 +1,36 @@
-import logo from './logo.svg';
 import './App.css';
+import {createContext, useState} from "react";
+import ReactSwitch from "react-switch";
+//custom components
+import Chart from '../src/Components/Iframes.js'
+import Introduction from "./Components/introduction";
+import Summary from "./Components/explanation";
+export const ThemeContext = createContext(null);
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [theme, setTheme] = useState("light");
+
+    const toggleTheme = () => {
+        setTheme((curr) => (curr === "light" ? "dark" : "light"));
+    };
+    return (
+        <ThemeContext.Provider value={{theme, toggleTheme}}>
+            <div className="App" id={theme}>
+                <header>
+                    <p style={{fontFamily: 'Roboto', fontSize: 35, fontWeight: 600}}>Indian cuisine king</p>
+                </header>
+                <div className="switch">
+                    <label style={{marginTop:10}}> {theme === "light" ? "Light Mode" : "Dark Mode"}</label>
+                    <ReactSwitch onChange={toggleTheme} checked={theme === "dark"}/>
+                </div>
+                <Introduction/>
+                <div style={{justifyContent:'center'}}>
+                    <Chart/>
+                </div>
+                <Summary/>
+            </div>
+        </ThemeContext.Provider>
+    );
 }
 
 export default App;
