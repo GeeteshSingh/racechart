@@ -5,6 +5,7 @@ import ReactSwitch from "react-switch";
 import Chart from '../src/Components/Iframes.js'
 import Introduction from "./Components/introduction";
 import Summary from "./Components/explanation";
+import Footer from "./Components/Aboutus";
 export const ThemeContext = createContext(null);
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
                     <Chart/>
                 </div>
                 <Summary/>
+                <Footer />
             </div>
         </ThemeContext.Provider>
     );
